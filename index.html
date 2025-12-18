@@ -443,8 +443,40 @@ function generateMathTask(){
 }
 
 function startMathTimer(){
-{clearInterval(mathTimerInterval); mathTimerInterval=setInterval(()=>{mathTimer--; const d=document.getElementById('timer'); d.textContent=`⏳ Time left: ${mathTimer}`; d.className=''; if(mathTimer>=20)d.classList.add('timer-green'); else if(mathTimer>=10)d.classList.add('timer-yellow'); else d.classList.add('timer-red'); if(mathTimer<=0){clearInterval(mathTimerInterval); correctMathCount=0; restartGame();}},1000);}
-function checkMathAnswer(){const input=document.getElementById('answer'); if(input.value==='')return; clearInterval(mathTimerInterval); if(Number(input.value)===correctAnswer){correctMathCount++; document.getElementById('message').textContent='✅ Correct!'; if(correctMathCount>=9){ setTimeout(startChromaticTrial,700); return;} setTimeout(()=>{mathTimer=30; generateMathTask(); startMathTimer();},700);} else{document.getElementById('message').textContent='❌ Wrong!'; correctMathCount=0; setTimeout(restartGame,1000);}}
+{clearInterval(mathTimerInterval); 
+ mathTimerInterval=setInterval(()=>{mathTimer--; 
+const d=document.getElementById('timer'); d.textContent=`⏳ Time left: ${mathTimer}`; d.className=''; 
+if(mathTimer>=20)d.classList.add('timer-green'); 
+else if(mathTimer>=10)d.classList.add('timer-yellow'); 
+else d.classList.add('timer-red'); 
+if(mathTimer<=0){
+  clearInterval(mathTimerInterval); 
+  correctMathCount=0; 
+  restartGame();
+  }
+ },1000);
+}
+function checkMathAnswer(){
+  const input=document.getElementById('answer'); 
+  if(input.value==='')return; 
+  clearInterval(mathTimerInterval); 
+  if(Number(input.value)===correctAnswer){
+    correctMathCount++; 
+    document.getElementById('message').textContent='✅ Correct!'; 
+    if(correctMathCount>=9){ 
+      setTimeout(startChromaticTrial,700); 
+      return;
+    } 
+    setTimeout(()=>{mathTimer=30; 
+    generateMathTask(); 
+    startMathTimer();
+  },700);
+} else {
+  document.getElementById('message').textContent='❌ Wrong!'; 
+  correctMathCount=0; 
+  setTimeout(restartGame,1000);
+  }
+}
 
 // ========================== CHROMATIC TRIAL ==========================
 function startChromaticTrial(){
