@@ -96,7 +96,7 @@ button:hover { background: #4caf50; }
   <button onclick="startWordChain()">START</button>
 </div>
   <!-- Tip Button -->
-<button id="tipButton"></button>
+<button id="tipButton">❗️</button>
 
 <!-- Modal für die Tipps -->
 <div id="tipModal" class="modal">
@@ -265,7 +265,7 @@ function aiTurn(){
   if(wordScore >= 6){
     const msg = document.getElementById('message');
     msg.textContent = '';
-    setTimeout(startTicTacToe, 600);
+    setTimeout(startTicTacToe, 500);
   }
 }
 
