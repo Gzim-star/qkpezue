@@ -460,14 +460,17 @@ function cycleColor(tile){
 
 // Prüfen, ob alle Felder die Ziel-Farbe haben
 function checkWin(){
-  const allGoal = tilesCT.every(t => colorsCT[Number(t.dataset.color)] === CHROMATIC_GOAL);
-  if(allGoal && !solved){
-  solved = true;
-  clearInterval(chromaticTimerInterval);
-  clearTimeout(uniformTimeout);
-  showChromaticWin();
-}
+  const allGoal = tilesCT.every(
+    t => colorsCT[Number(t.dataset.color)] === CHROMATIC_GOAL
+  );
 
+  if(allGoal && !solved){
+    solved = true;
+    clearInterval(chromaticTimerInterval);
+    clearTimeout(uniformTimeout);
+    showChromaticWin();
+  }
+}
 // Prüfen, ob alle Felder die gleiche Farbe haben (nicht unbedingt Ziel-Farbe)
 function checkUniformReset(){
   const firstColor = colorsCT[Number(tilesCT[0].dataset.color)];
