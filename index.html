@@ -9,17 +9,14 @@
 html, body { height: 100%; margin: 0; }
 body {
   display: grid; place-items: center;
-  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
-    url("container-bg.jpg") center / cover no-repeat; color: white;
+  background: #000; color: white;
   font-family: Arial, Sans-Pixel; text-align: center;
 }
 #gameContainer {
   width: 90%; max-width: 700px; min-height: 520px;
-  padding: 20px; background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
-    url("container-bg.jpg") center / cover no-repeat; border-radius: 15px;
+  padding: 20px; background: #000; border-radius: 15px;
   box-shadow: 0 0 25px rgba(255,255,255,0.08);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  url("container-bg.jpg")
 }
   #tipButton {
   position: fixed;
@@ -127,7 +124,7 @@ tipButton.onclick = () => {
       <p>Word Chain Tips:</p>
     <ul>
       <li>Think of the last letter of...</li>
-      <li>Find the tipp.</li>
+      <li>Find the Answer.</li>
       <li>Longer or smarter❗️</li>
     </ul>
   `;
@@ -201,7 +198,7 @@ function startWordChain(){
     color:#ffc107;
     min-height:18px;
     opacity:0;
-    transition: opacity 0.3s;
+    transition: opacity 0.5s;
   "></div>
 `;
   currentWord='Apple'; usedWords=[currentWord];
@@ -217,8 +214,8 @@ function playWord(){
   const message=document.getElementById('message');
   if(!word) return;
   // Mindestlänge
-if(word.length < 3){
-  message.textContent = "❌ Wrong";
+if(word.length < 6){
+  message.textContent = "❌ Wrong!";
   return;
 }
 
@@ -226,7 +223,7 @@ if(word.length < 3){
   // Kein gleicher Endbuchstabe wie davor
 const lastTwo = currentWord.slice(-2).toLowerCase();
 if(word.slice(-1).toLowerCase() === lastTwo[0]){
-  message.textContent = "❌ Weak ending";
+  message.textContent = "❌ Weak ending!";
   return;
   
 }
@@ -281,7 +278,7 @@ if(possible.length === 0){
 
   wordScore++;
 
-  if(wordScore >= 3){
+  if(wordScore >= 6){
     const msg = document.getElementById('message');
     msg.textContent = '';
     setTimeout(startTicTacToe, 500);
@@ -521,7 +518,7 @@ function showChromaticMessage(){
   var text = document.getElementById('chromaticText');
   if(!text) return;
 
-  text.textContent = "Have you found the color?";
+  text.textContent = " Find the right color";
   text.style.opacity = "1";
 
   setTimeout(function(){
