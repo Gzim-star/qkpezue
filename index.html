@@ -188,7 +188,17 @@ let board=[], gameOver=false;
 let correctAnswer=0, correctMathCount=0;
 let timer=10, timerInterval;
 let mathTimer=30, mathTimerInterval;
+function showWordError(text) {
+  const message = document.getElementById('message');
+  if (!message) return;
 
+  message.textContent = text;
+  message.style.opacity = "1";
+
+  setTimeout(() => {
+    message.textContent = "";
+  }, 1200);
+}
 // ========================== WORD CHAIN ==========================
 function startWordChain(){
   stage='word';
@@ -229,7 +239,7 @@ function playWord(){
   if(!word) return;
   // Mindestlänge
 if(word.length < 6){
-  message.textContent = "❌ Wrong!";
+  showWordError("❌ Wrong!");
   return;
 }
 
@@ -237,16 +247,16 @@ if(word.length < 6){
   // Kein gleicher Endbuchstabe wie davor
 const lastTwo = currentWord.slice(-2).toLowerCase();
 if(word.slice(-1).toLowerCase() === lastTwo[0]){
-  message.textContent = "❌ Weak ending!";
+  showWordError("❌ Weak ending!");
   return;
   
 }
   const lastChar=currentWord.slice(-1).toLowerCase();
   const reversed=currentWord.split("").reverse().join("").toLowerCase();
-  if(word[0].toLowerCase()!==lastChar){message.textContent="❌ Wrong!";return;}
-  if(word.toLowerCase()===currentWord.toLowerCase()){message.textContent="❌ Repeat!";return;}
-  if(word.toLowerCase()===reversed){message.textContent="❌ Reversed!";return;}
-  if(usedWords.map(w=>w.toLowerCase()).includes(word.toLowerCase())){message.textContent="❌ Already used!";return;}
+  if(word[0].toLowerCase()!==lastChar)showWordError("❌ Wrong!");return;}
+  if(word.toLowerCase()===currentWord.toLowerCase())showWordError("❌ Repeat!");return;}
+  if(word.toLowerCase()===reversed)showWordError("❌ Reversed!");return;}
+  if(usedWords.map(w=>w.toLowerCase()).includes(word.toLowerCase()))showWordError("❌ Already used!");return;}
   usedWords.push(word); currentWord=word;
   document.getElementById('wordDisplay').textContent=``;
   input.value=''; message.textContent='';
