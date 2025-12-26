@@ -162,41 +162,41 @@ Tips: Pay attention to the structure of the system. Logical consistency, awarene
   `;
 
   else if(stage === 'word') tipText = `
-      <p>Word Chain Tips:</p>
-    <ul>
-      <li>Think of the last letter</li>
-      <li>Find the Answer</li>
-      <li>Longer or smarter</li>
-    </ul>
+      Word Chain Tips:
+    
+      Think of the last letter
+      Find the Answer
+      Longer or smarter
+    
   `;
 
   else if(stage === 'tic') tipText = `
-      <p>Tic-Tac-Toe Tips:</p>
-    <ul>
-      <li>Get three to win.</li>
-      <li>Block your opponent.</li>
-      <li>Center is powerful.</li>
-      <li>It's simple!</li>
-    </ul>
+      Tic-Tac-Toe Tips:
+    
+      Get three to win.
+      Block your opponent.
+      Center is powerful.
+      It's simple!
+    
   `;
 
   else if(stage === 'math') tipText = `
-      <p>Math Challenge Tips:</p>
-    <ul>
-      <li>Follow order of operations...</li>
-      <li>Solve quickly time is running!</li>
-      <li>Correct answers let you advance</li>
-      <li>Wrong answers,send you back.</li>
-    </ul>
+      Math Challenge Tips:
+    
+      Follow order of operations...
+      Solve quickly time is running!
+      Correct answers let you advance
+      Wrong answers,send you back.
+    
   `;
 
   else if(stage === 'chromatic') tipText = `
-      <p>Chromatic Trial Tips:</p>
-    <ul>
-      <li>Make all tiles the same color.</li>
-      <li>Focus on one color and act fast</li>
-      <li>Or grid will reset.</li>
-    </ul>
+      Chromatic Trial Tips:
+    
+      Make all tiles the same color.
+      Focus on one color and act fast
+      Or grid will reset.
+    
   `;
   typeText(tipModal.querySelector('p'), tipText, 0.5);
   tipModal.style.display = 'block';
