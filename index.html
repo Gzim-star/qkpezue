@@ -134,13 +134,14 @@ tipButton.onclick = () => {
   let tipText = '';
   if(stage === 'start') tipText = `
     BrainTrials:
+    
     BrainTrials is a deterministic, rule-based cognitive system designed to validate structured human input under real-time constraints.
 
 The system does not rely on dictionaries, artificial intelligence, machine learning, or probabilistic guessing.
-All outcomes are derived exclusively from explicit rules, state transitions, and input validation logic.</p>
+All outcomes are derived exclusively from explicit rules, state transitions, and input validation logic.
 
 Each interaction is processed synchronously, ensuring immediate feedback without latency, freezing, or hidden computation.
-Invalid inputs are rejected through rule violations rather than semantic interpretation.</p>
+Invalid inputs are rejected through rule violations rather than semantic interpretation.
 
 The architecture enforces progression through constrained stages, where advancement depends on consistency, pattern recognition, and temporal accuracy.
 This design results in a system that is resistant to brute-force input, random noise, and exploit attempts.
@@ -155,7 +156,7 @@ Scoring and progression are strictly governed by rules: success depends on preci
 BrainTrials is optimized for instantaneous feedback, ensuring that each action triggers an immediate and deterministic response. The system’s internal logic prevents hidden operations, caching, or delayed evaluation, guaranteeing transparency in every interaction.
 
 Tips: Pay attention to the structure of the system. Logical consistency, awareness of patterns, and strategic foresight are essential to advance. Each game mode builds upon the principles of the previous, requiring both analytical thinking and adaptive strategy.
-    You are entering the arena of challenges!</p>
+    You are entering the arena of challenges!
     Only those who think cleverly, react quickly, and recognize patterns can reach the end.
   `;
 
@@ -196,7 +197,7 @@ Tips: Pay attention to the structure of the system. Logical consistency, awarene
       <li>Or grid will reset.</li>
     </ul>
   `;
-  typeText(tipModal.querySelector('p'), tipText, 10);
+  typeText(tipModal.querySelector('p'), tipText, 20);
   tipModal.style.display = 'block';
 };
 
