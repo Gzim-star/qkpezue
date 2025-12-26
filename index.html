@@ -46,7 +46,10 @@ body {
   height: 100%;
   background-color: #00000000;
 }
-.modal-content {
+.modal.show {
+  display: block; /* nur sichtbar, wenn 'show' aktiv ist */
+}
+  .modal-content {
   background-color: #00000000;
   margin: 15% auto;
   padding: 20px;
