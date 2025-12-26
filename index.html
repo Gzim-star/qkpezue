@@ -191,7 +191,7 @@ tipButton.onclick = () => {
       <li>Or grid will reset.</li>
     </ul>
   `;
-  tipModal.querySelector('p').innerHTML = tipText;
+  typeText(tipModal.querySelector('p'), tipText, 10);
   tipModal.style.display = 'block';
 };
 
@@ -199,6 +199,21 @@ closeBtn.onclick = () => tipModal.style.display = 'none';
 
 window.onclick = (e) => { 
   if(e.target === tipModal) tipModal.style.display = 'none';
+// ========================== TYPEWRITER EFFECT ==========================
+function typeText(element, text, speed = 15) {
+  element.innerHTML = "";
+  let i = 0;
+
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+
+  typing();
+}
 };
   
 // ========================== VARIABLES ==========================
