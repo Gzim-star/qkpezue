@@ -637,23 +637,11 @@ function showChromaticMessage(){
     text.style.opacity = "0";
   }, 3000);
 }
-    function restartGame(){
+function restartGame(){
   clearInterval(chromaticTimerInterval);
   clearInterval(mathTimerInterval);
   clearTimeout(uniformTimeout);
 
-   // Startscreen wieder sichtbar
-  startScreen.style.display = 'none';
-
-  // GameContainer wieder verstecken, bis Nutzer klickt
-  document.getElementById('gameContainer').style.display = 'none'; 
-// Startscreen-Logik
-const startScreen = document.getElementById('startScreen');
-
-startScreen.onclick = () => {
-  startScreen.style.display = 'none';
-  document.getElementById('gameContainer').style.display = 'none';
-};
   // Variablen zurücksetzen
   stage = 'start';
   wordScore = 0;
@@ -664,6 +652,14 @@ startScreen.onclick = () => {
   gameOver = false;
   correctAnswer = 0;
   correctMathCount = 0;
+
+  // Spiel ausblenden
+  document.getElementById('gameContainer').style.display = 'none';
+
+  // Flow-Bild anzeigen
+  const startScreen = document.getElementById('startScreen');
+  startScreen.style.display = 'flex';
+   
 }
 function showChromaticWin(){
   const text = document.getElementById('chromaticWinText');
