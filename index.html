@@ -443,14 +443,14 @@ function renderBoard(){
   });
 }
 function randomColor(){const c=["#808080",
-"",
-"",
-"",
-"",
-"",
-"",
 "#ffffff",
-""]; return c[Math.floor(Math.random()*c.length)];}
+"#808080",
+"#ffffff",
+"#808080",
+"#ffffff",
+"#808080",
+"#ffffff",
+"#808080"]; return c[Math.floor(Math.random()*c.length)];}
 function startTimer(){clearInterval(timerInterval); timer=10; updateTimerUI(); timerInterval=setInterval(()=>{timer--; updateTimerUI(); if(timer===0){clearInterval(timerInterval); aiMove();}},1000);}
 function updateTimerUI(){const d=document.getElementById('timer'); let seconds = String(timer).padStart(2, '0'); d.textContent=`00:${seconds}`; d.className=''; if(timer>=8)d.classList.add('timer-green'); else if(timer>=5)d.classList.add('timer-yellow'); else d.classList.add('timer-red');}
 function playerMove(i){if(board[i]!=='') return; board[i]='X'; clearInterval(timerInterval); renderBoard(); if(checkWinner('X')){ gameOver=true; ticScore.player++; document.getElementById('message').textContent="You win!"; updateScore(); if(ticScore.player>=3){ setTimeout(startMathChallenge,800);} else { setTimeout(resetBoard,800);} return;} if(board.every(c=>c!=='')){ gameOver=true; ticScore.draw++; updateScore(); setTimeout(resetBoard,800); return;} setTimeout(aiMove,400);}
