@@ -295,12 +295,12 @@ function showWordError(text) {
   let accessGranted = false;
 
   function askPassword() {
-    const pw = prompt("Enter password to start BrainTrials:");
+    const pw = prompt("");
     if (pw === "1234") { // <-- hier dein Passwort
       accessGranted = true;
       document.getElementById('startScreen').style.display = 'flex';
     } else {
-      alert("Wrong password! Try again.");
+      alert("Wrong");
       askPassword(); // erneut fragen
     }
   }
