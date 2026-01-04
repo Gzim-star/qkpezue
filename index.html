@@ -105,8 +105,7 @@ button:hover { background: #00000000; }
 .modal.open {
   display: block;
 }
-  
-  #startScreen {
+#startScreen {
   position: fixed;
   inset: 0;
   background: black;
@@ -120,40 +119,14 @@ button:hover { background: #00000000; }
   height: auto;
   cursor: pointer;
 }
- 
-  for(let i=0; i<5; i++){
-    const spark = document.createElement('div');
-    spark.className = 'spark';
-    spark.style.top = (e.clientY + (Math.random()*20-10)) + 'px';
-    spark.style.left = (e.clientX + (Math.random()*20-10)) + 'px';
-    document.body.appendChild(spark);
-    setTimeout(() => spark.remove(), 1000);
-  }
-
 </style>
 </head>
 <body>
- 
+  
  <div id="startScreen">
- <!-- Schatz versteckt -->
-<div id="treasure" title="Click me!" style="
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-47%, -50%);
-    width: 1000px;
-    height: 1000px;
-    border-radius: 50%;
-    background: none;
-    cursor: pointer;
-    z-index: 4000;
-    box-shadow: none;
-"></div>
- 
- <img src="IMG_1244.jpeg" alt="BrainTrials Logo">
- </div>
-
-   <div id="gameContainer">
+  <img src="IMG_1244.jpeg" alt="BrainTrials Logo">
+</div>
+  <div id="gameContainer">
   <h1></h1>
   <button onclick="startWordChain()">  START  </button>
 </div>
@@ -167,7 +140,6 @@ button:hover { background: #00000000; }
     <p></p>
   </div>
 </div>
-
   <script>
   document.getElementById('startScreen').onclick = () => {
   document.getElementById('startScreen').style.display = 'none';
@@ -318,8 +290,7 @@ function showWordError(text) {
     message.textContent = "";
   }, 1200);
 }
-
-    // ========================== WORD CHAIN ==========================
+// ========================== WORD CHAIN ==========================
 function startWordChain(){
   stage='word';
   const container=document.getElementById('gameContainer');
@@ -739,33 +710,6 @@ function showChromaticWin(){
     restartGame();
   }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
 }
-
-const treasure = document.getElementById('treasure');
-treasure.onclick = (e) => {
-  // Text anzeigen
-  const msg = document.createElement('div');
-  msg.textContent = "Welcome";
-  msg.style.position = 'fixed';
-  msg.style.top = '10%';
-  msg.style.left = '50%';
-  msg.style.transform = 'translate(-50%, -50%)';
-  msg.style.background = 'none';
-  msg.style.color = 'White';
-  msg.style.padding = '12px 20px';
-  msg.style.borderRadius = '12px';
-  msg.style.fontFamily = "'Press Start 2P', cursive";
-  msg.style.fontSize = '1.4em';
-  msg.style.zIndex = '5000';
-  msg.style.opacity = '0';
-  msg.style.transition = 'opacity 0.3s';
-  document.body.appendChild(msg);
-  setTimeout(() => msg.style.opacity = '1', 50);
-  setTimeout(() => msg.remove(), 3000);
-
-  // Schatz verschwinden
-  treasure.style.display = 'none';
-};
-
 
 </script>
 </body>
