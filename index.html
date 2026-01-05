@@ -159,9 +159,53 @@ button:hover { background: #00000000; }
   </div>
 </div>
   <script>
+  // ========================== START WELCOME HINT ==========================
+function showStartWelcomeHint() {
+  const msg = document.createElement('div');
+  msg.textContent = "Welcome";
+
+  msg.style.position = 'fixed';
+  msg.style.top = '60%';
+  msg.style.left = '50%';
+  msg.style.transform = 'translate(-50%, -50%)';
+
+  msg.style.fontFamily = "'Press Start 2P', cursive";
+  msg.style.fontSize = '1em';
+  msg.style.color = '#d0d0d0';
+
+  msg.style.opacity = '0';
+  msg.style.transition = 'opacity 0.6s';
+
+  // 🔑 WICHTIG: Trennung vom Manuskript
+  msg.style.zIndex = '9999';
+  msg.style.pointerEvents = 'none';
+  msg.style.userSelect = 'none';
+  msg.style.backdropFilter = 'blur(2px)';
+  msg.style.webkitBackdropFilter = 'blur(2px)';
+
+  document.body.appendChild(msg);
+
+  // sanft einblenden
+  setTimeout(() => {
+    msg.style.opacity = '1';
+  }, 50);
+
+  // nach 3 Sekunden ausblenden
+  setTimeout(() => {
+    msg.style.opacity = '0';
+  }, 3000);
+
+  // danach entfernen
+  setTimeout(() => {
+    msg.remove();
+  }, 3800);
+}
   document.getElementById('startScreen').onclick = () => {
   document.getElementById('startScreen').style.display = 'none';
+  // ⏱ Welcome-Hint nach 5 Sekunden
+  setTimeout(showStartWelcomeHint, 5000);
 };
+  
     // ========================== TIP BUTTON LOGIC ==========================
 const tipButton = document.getElementById('tipButton');
 const tipModal = document.getElementById('tipModal');
@@ -176,15 +220,7 @@ startScreen.onclick = () => {
   // Start-Button zeigen
   startButton.style.display = 'block';
 
-  // Welcome nach 5 Sekunden
-  setTimeout(() => {
-    welcomeHint.style.opacity = '1';
-  // nach 3 Sekunden wieder ausblenden
-    setTimeout(() => {
-      welcomeHint.style.opacity = '0';
-    }, 3000);
-  }, 5000);
-};
+
 tipButton.onclick = () => {
   // 🔁 öffnen / schließen
   tipModal.classList.toggle('open');
