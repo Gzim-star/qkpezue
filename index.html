@@ -119,17 +119,12 @@ button:hover { background: #00000000; }
   height: auto;
   cursor: pointer;
 }
-  #startButton {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
+@keyframes sparkle {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(0); opacity: 0; }
 }
-.puls {
+.spark {
   position: absolute;
   width: 6px;
   height: 6px;
@@ -147,7 +142,7 @@ button:hover { background: #00000000; }
   <!-- Schatz versteckt -->
 <div id="treasure" title="Click me!" style="
     position: absolute;
-    top: 47.6%;
+    top: 47%;
     left: 49%;
     transform: translate(-50%, -50%);
     width: 22px;
@@ -156,16 +151,15 @@ button:hover { background: #00000000; }
     background: gold;
     cursor: pointer;
     z-index: 4000;
-    animation: pulse 2s infinite;
     box-shadow: 0 0 10px 3px gold;
 "></div>
   <img src="IMG_1244.jpeg" alt="BrainTrials Logo">
 </div>
   <div id="gameContainer">
   <h1></h1>
-<button id="startButton" onclick="startWordChain()">START</button>
+  <button onclick="startWordChain()">  START  </button>
 </div>
-<!-- Tip Button -->
+  <!-- Tip Button -->
 <button id="tipButton">❕</button>
 
 <!-- Modal für die Tipps -->
@@ -777,12 +771,9 @@ treasure.onclick = (e) => {
   document.body.appendChild(msg);
   setTimeout(() => msg.style.opacity = '1', 50);
   setTimeout(() => msg.remove(), 8000);
-const startButton = document.getElementById('startButton');
 
-startButton.style.visibility = 'visible';
-startButton.style.opacity = '1';
- treasure.onclick = (e) => {
- 
+  // Schatz verschwinden
+  treasure.style.display = 'none';
 };
 </script>
 </body>
