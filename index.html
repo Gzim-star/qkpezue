@@ -194,15 +194,23 @@ function showStartWelcomeHint() {
   setTimeout(() => {
     msg.style.opacity = '0';
   }, 3000);
-}
+
 
   // danach entfernen
   setTimeout(() => {
     msg.remove();
   }, 3800);
 }
-  document.getElementById('startScreen').onclick = () => {
-  document.getElementById('startScreen').style.display = 'none';
+startScreen.onclick = () => {
+  startScreen.style.display = 'none';
+
+  // Start-Button zeigen
+  startButton.style.display = 'block';
+
+  // Welcome-Hint nach 5 Sekunden
+  setTimeout(showStartWelcomeHint, 5000);
+};
+  
   // ⏱ Welcome-Hint nach 5 Sekunden
   setTimeout(showStartWelcomeHint, 5000);
 };
