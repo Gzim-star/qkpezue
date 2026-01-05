@@ -181,7 +181,7 @@ button:hover { background: #00000000; }
   document.getElementById('startScreen').onclick = () => {
   document.getElementById('startScreen').style.display = 'none';
   startStartButtonTimer();
-  };
+  };{ once: true });
     // ========================== TIP BUTTON LOGIC ==========================
 const tipButton = document.getElementById('tipButton');
 const tipModal = document.getElementById('tipModal');
@@ -778,8 +778,8 @@ treasure.onclick = (e) => {
 
   // Schatz verschwinden
   treasure.style.display = 'none';
-};
-let startTimerStarted = false;
+
+
 
 function startStartButtonTimer() {
   if (startTimerStarted) return; // ⛔ nur einmal
