@@ -67,7 +67,6 @@ body {
 }
 .close:hover { color: #00000000; }
  
-
 h1 { font-size: 1.8em; margin-bottom: 20px; color: #808080; font-family: 'Press Start 2P', cursive; }
 #task, #wordDisplay { font-size: 1.4em; margin: 20px 0; min-height: 50px; font-family: 'Press Start 2P', cursive; word-break: keep-all; }
 #inputContainer { display: flex; flex-direction: column; align-items: center; }
@@ -120,35 +119,18 @@ button:hover { background: #00000000; }
   height: auto;
   cursor: pointer;
 }
-
 </style>
 </head>
 <body>
-<div id="welcomeHint" style="
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Press Start 2P', cursive;
-  font-size: 1.4em;
-  color: white;
-  opacity: 0;
-  transition: opacity 0.5s;
-  z-index: 4000;
-">
-  Welcome
-</div>  
+  
  <div id="startScreen">
   <img src="IMG_1244.jpeg" alt="BrainTrials Logo">
 </div>
-<div id="gameContainer">
+  <div id="gameContainer">
   <h1></h1>
-  <button id="startButton" onclick="startWordChain()" style="display:none;">
-  START
-</button>
-  </div>
-
-<!-- Tip Button -->
+  <button onclick="startWordChain()">  START  </button>
+</div>
+  <!-- Tip Button -->
 <button id="tipButton">❕</button>
 
 <!-- Modal für die Tipps -->
@@ -159,71 +141,13 @@ button:hover { background: #00000000; }
   </div>
 </div>
   <script>
-  // ========================== START WELCOME HINT ==========================
-function showStartWelcomeHint() {
-  const msg = document.createElement('div');
-  msg.textContent = "Welcome";
-
-  msg.style.position = 'fixed';
-  msg.style.top = '10%';
-  msg.style.left = '50%';
-  msg.style.transform = 'translate(-50%, -50%)';
-
-  msg.style.fontFamily = "'Press Start 2P', cursive";
-  msg.style.fontSize = '1.4em';
-  msg.style.color = '#d0d0d0';
-
-  msg.style.opacity = '0';
-  msg.style.transition = 'opacity 0.6s';
-
-  // 🔑 WICHTIG: Trennung vom Manuskript
-  msg.style.zIndex = '9999';
-  msg.style.pointerEvents = 'none';
-  msg.style.userSelect = 'none';
-  msg.style.backdropFilter = 'blur(2px)';
-  msg.style.webkitBackdropFilter = 'blur(2px)';
-
-  document.body.appendChild(msg);
-
-  // sanft einblenden
-  setTimeout(() => {
-    msg.style.opacity = '1';
-  }, 50);
-
-  // nach 3 Sekunden ausblenden
-  setTimeout(() => {
-    msg.style.opacity = '0';
-  }, 3000);
-
-
-  // danach entfernen
-  setTimeout(() => {
-    msg.remove();
-  }, 3800);
-}
-
-   // ========================== TIP BUTTON LOGIC ==========================
+  document.getElementById('startScreen').onclick = () => {
+  document.getElementById('startScreen').style.display = 'none';
+};
+    // ========================== TIP BUTTON LOGIC ==========================
 const tipButton = document.getElementById('tipButton');
 const tipModal = document.getElementById('tipModal');
 const closeBtn = document.querySelector('.close');
-const startScreen = document.getElementById('startScreen');
-const startButton = document.getElementById('startButton');
-const welcomeHint = document.getElementById('welcomeHint');
-
-startScreen.onclick = () => {
-  // ✅ Spiel-Container wieder sichtbar machen
-  document.getElementById('gameContainer').style.display = 'flex';
-
-  // Flow-Bild ausblenden
-  startScreen.style.display = 'none';
-
-  // Start-Button anzeigen
-  startButton.style.display = 'block';
-
-  // Welcome-Hint nach 5 Sekunden
-  setTimeout(showStartWelcomeHint, 5000);
-};
-
 
 tipButton.onclick = () => {
   // 🔁 öffnen / schließen
