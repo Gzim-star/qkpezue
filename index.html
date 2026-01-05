@@ -23,9 +23,6 @@ body {
   box-shadow: black; 
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
- #startButton {
-  display: none; /* versteckt den Button am Anfang */
-}
   #tipButton {
   position: fixed;
   bottom: 20px;
@@ -780,11 +777,15 @@ treasure.onclick = (e) => {
   // Schatz verschwinden
   treasure.style.display = 'none';
 };
-// Button nach 6 Sekunden anzeigen
+// Button erst nach 9 Sekunden erstellen
 setTimeout(() => {
-  const btn = document.getElementById('startButton');
-  if(btn) btn.style.display = 'inline-block';
-}, 9000); // 6000ms = 6 Sekunden
+  const container = document.getElementById('gameContainer');
+  const btn = document.createElement('button');
+  btn.id = 'startButton';
+  btn.textContent = 'START';
+  btn.onclick = startWordChain;
+  container.appendChild(btn);
+}, 9000);
 </script>
 </body>
 </html>
