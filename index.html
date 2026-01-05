@@ -201,23 +201,22 @@ function showStartWelcomeHint() {
     msg.remove();
   }, 3800);
 }
-startScreen.onclick = () => {
-  startScreen.style.display = 'none';
-  startButton.style.display = 'block';
-  setTimeout(showStartWelcomeHint, 5000);
-};
-  
- 
 
-  
-    // ========================== TIP BUTTON LOGIC ==========================
+   // ========================== TIP BUTTON LOGIC ==========================
 const tipButton = document.getElementById('tipButton');
 const tipModal = document.getElementById('tipModal');
 const closeBtn = document.querySelector('.close');
 const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
 const welcomeHint = document.getElementById('welcomeHint');
+startScreen.onclick = () => {
+  startScreen.style.display = 'none';
 
+  gameContainer.style.display = 'flex'; // wichtig beim Neustart
+  startButton.style.display = 'block';
+
+  setTimeout(showStartWelcomeHint, 5000);
+};
 
 
 
