@@ -602,25 +602,9 @@ function startChromaticTrial(){
   container.innerHTML=`
   <h1></h1>
 
-    <div id="grid"></div>
-<div id="chromaticWinText" style="
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Press Start 2P', cursive;
-  font-size: 1em;
-  color: #ffffff;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 1s;
-  pointer-events: none;
-">
-  Correct<br>
-  
-</div>
+    
     <div id="chromaticText" style="
-      margin-top:15px;
+      margin-bottom:15px;
       font-family:'Press Start 2P', cursive;
       font-size:0.7em;
       color:#808080;
@@ -629,6 +613,27 @@ function startChromaticTrial(){
       transition: opacity 0.5s;
     "></div>
 
+    
+    <div id="grid"></div>
+
+    
+    <div id="chromaticWinText" style="
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1em;
+      color: #ffffff;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s;
+      pointer-events: none;
+    ">
+      Correct<br>
+    </div>
+
+  
     <div id="timer">60</div>
   `;
 
