@@ -43,20 +43,34 @@ body {
   z-index: 2000;
 
   opacity: 0;
+  perspective: 800px;
+  transition: right 1.2s ease, opacity 1.2s ease;
 }
 
 #tipButton.show {
-  animation: rollIn 1.2s ease-out forwards;
+  right: 20px;
+  opacity: 1;
 }
 
-@keyframes rollIn {
+#tipButton .cube-face {
+  display: inline-block;
+  transform-style: preserve-3d;
+}
+
+/* 🎲 WÜRFEL-ANIMATION */
+#tipButton.roll .cube-face {
+  animation: cubeRoll 1s ease-in-out forwards;
+}
+
+@keyframes cubeRoll {
   0% {
-    animation: rollIn(0) rotate(0deg);
-    opacity: 0;
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: rotateX(90deg) rotateY(90deg);
   }
   100% {
-    animation: rollIn(180) rotate(360deg);
-    opacity: 1;
+    transform: rotateX(180deg) rotateY(180deg);
   }
 }
 #tipButton:hover { color: #00000000; }
@@ -210,7 +224,9 @@ button:hover { background: #00000000; }
  <button id="startButton" onclick="startWordChain()">START</button> 
 </div>
   <!-- Tip Button -->
-<button id="tipButton">◽️</button>
+<button id="tipButton">
+  <span class="cube-face">◽</span>
+</button>
 
 <!-- Modal für die Tipps -->
 <div id="tipModal" class="modal">
@@ -227,20 +243,20 @@ button:hover { background: #00000000; }
 const tipButton = document.getElementById('tipButton');
 const cubeFace = tipButton.querySelector('.cube-face');
 
-// kommt von rechts
+// von rechts reinschieben
 setTimeout(() => {
   tipButton.classList.add('show');
 }, 500);
 
-// Würfel-Drehung starten
+// 🎲 Würfel rollen
 setTimeout(() => {
-  tipButton.classList.add('rollIn');
+  tipButton.classList.add('roll');
 }, 1600);
 
-// Symbol wechseln während der Drehung
+// Symbol während der Drehung wechseln
 setTimeout(() => {
   cubeFace.textContent = '❕';
-}, 2000);
+}, 1900);
 
 const tipModal = document.getElementById('tipModal');
 const closeBtn = document.querySelector('.close');
