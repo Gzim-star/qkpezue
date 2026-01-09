@@ -37,36 +37,16 @@ body {
   right: -60px;
   background: none;
   border: none;
-  color: white;
   font-size: 28px;
   cursor: pointer;
   z-index: 2000;
   opacity: 0;
-  transition: right 1.2s ease, opacity 1.2s ease;
+  transition: right 1s ease, opacity 1s ease;
 }
 
 #tipButton.show {
   right: 20px;
   opacity: 1;
-}
-
-#tipButton .cube-face {
-  display: inline-block;
-  transform-origin: bottom center;
-}
-
-/* 🎲 echtes Rollen */
-#tipButton.rollin .cube-face {
-  animation: cubeRoll 1.2s linear forwards;
-}
-
-@keyframes cubeRoll {
-  0%   { transform: rotate(0deg); }
-  20%  { transform: rotate(-25deg); }
-  40%  { transform: rotate(0deg); }
-  60%  { transform: rotate(-25deg); }
-  80%  { transform: rotate(0deg); }
-  100% { transform: rotate(-25deg); }
 }
 #tipButton:hover { color: #00000000; }
 
@@ -235,6 +215,29 @@ button:hover { background: #00000000; }
   document.getElementById('startScreen').style.display = 'none';
 };
     // ========================== TIP BUTTON LOGIC =========================
+const tipButton = document.getElementById('tipButton');
+const cube = document.getElementById('cube');
+
+// reinschieben
+setTimeout(() => {
+  tipButton.classList.add('show');
+}, 500);
+
+// 🎲 WÜRFEL-ROLLEN (ECHT)
+setTimeout(() => {
+  const frames = ['◽', '◻', '◼', '◻', '◽'];
+  let i = 0;
+
+  const roll = setInterval(() => {
+    cube.textContent = frames[i];
+    i++;
+
+    if (i >= frames.length) {
+      clearInterval(roll);
+      cube.textContent = '❕'; // Ergebnis
+    }
+  }, 120);
+}, 10000);
 const tipButton = document.getElementById('tipButton');
 const cubeFace = tipButton.querySelector('.cube-face');
 
