@@ -195,8 +195,8 @@ button:hover { background: #00000000; }
   }
 }
 
-/* ❕ pulsiert nur wenn Hilfe nötig */
-#tipButton.help-needed .cube-face {
+/* ❕ pulsiert */
+#tipButton.pulse-only .cube-face {
   animation: innerPulse 1.4s ease-in-out infinite;
 }
 
@@ -259,13 +259,10 @@ button:hover { background: #00000000; }
     // ========================== TIP BUTTON LOGIC =========================
 const tipButton = document.getElementById('tipButton');
 const cubeFace = tipButton.querySelector('.cube-face');
-function showTipHelp() {
-  tipButton.classList.add("help-needed");
-}
-
-function stopTipHelp() {
-  tipButton.classList.remove("help-needed");
-}
+// ❕ beginnt nach 5 Sekunden zu pulsieren
+setTimeout(() => {
+  tipButton.classList.add("pulse-only");
+}, 62000);
 // TIP BUTTON erst nach 9 Sekunden erscheinen lassen
 setTimeout(() => {
   tipButton.classList.add('show'); // Button kommt rein
