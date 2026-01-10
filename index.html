@@ -31,42 +31,23 @@ body {
 
 }
 
-/* Glitch/Störungs-Effekt mit Doppelung */
-#startButton.glitchEffect {
-  position: relative;
-}
-
-#startButton.glitchEffect::before,
-#startButton.glitchEffect::after {
-  content: attr(data-text);
+/* Fragment Effekt */
+.fragment {
   position: absolute;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
-  color: #fff; /* weiß/grau */
-  opacity: 0.6;
-  pointer-events: none;
+  background: inherit;
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 50% 0, 50% 50%, 0 50%);
+  /* Polygon kann für mehrere Teile angepasst werden */
+  animation: fragmentFall 1s forwards;
 }
 
-#startButton.glitchEffect::before {
-  transform: translate(-3px, 2px);
-}
-#startButton.glitchEffect::after {
-  transform: translate(3px, -2px);
-}
-
-@keyframes glitchPuzzle {
-  0%   { transform: translate(0, 0); }
-  20%  { transform: translate(-2px, 2px); }
-  40%  { transform: translate(2px, -2px); }
-  60%  { transform: translate(-1px, 1px); }
-  80%  { transform: translate(1px, -1px); }
-  100% { transform: translate(0, 0); }
-}
-
-#startButton.glitchEffect.animate {
-  animation: glitchPuzzle 0.6s steps(5, end) 3;
+@keyframes fragmentFall {
+  0% { transform: translate(0,0) rotate(0deg); opacity:1; }
+  50% { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity:0.6; }
+  100% { transform: translate(0,0) rotate(0deg); opacity:1; }
 }
   #tipButton {
   position: fixed;
@@ -912,14 +893,22 @@ setTimeout(() => {
   if (btn) {
   btn.style.opacity = '1';
   btn.style.pointerEvents = 'auto';
-    // Text für Doppelung
-    btn.setAttribute('data-text', btn.textContent);
+  // Anzahl der Fragmente
+  const parts = 6;
 
-    // Glitch/Puzzle Effekt starten
-    btn.classList.add('glitchEffect', 'animate');
+  for (let i = 0; i < parts; i++) {
+    const frag = document.createElement('div');
+    frag.className = 'fragment';
+    
+    // zufällige Richtung, wie es auseinanderfällt
+    frag.style.setProperty('--x', (Math.random()*60 - 30) + 'px'); 
+    frag.style.setProperty('--y', (Math.random()*60 - 30) + 'px'); 
+    frag.style.setProperty('--r', (Math.random()*30 - 15) + 'deg');
+    
+    btn.appendChild(frag);
 
-    // Nach Ablauf wieder entfernen
-    setTimeout(() => btn.classList.remove('animate', 'glitchEffect'), 2000);
+    // nach Animation löschen
+    frag.addEventListener('animationend', () => frag.remove());
   }
 }, 90000);
 
