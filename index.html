@@ -31,18 +31,19 @@ body {
 
 }
 
-/* Glitch-Effekt für den Start-Button */
+/* Glitch/Störungs-Effekt */
 #startButton.glitchEffect {
-  animation: glitch 1s ease-in-out 3; /* 3 Wiederholungen */
+  position: relative; /* wichtig für die Verschiebung */
+  animation: glitchPuzzle 1s steps(5, end) 3; /* 3 Durchläufe */
 }
 
-@keyframes glitch {
-  0% { transform: translate(0,0) skew(0deg,0deg); }
-  20% { transform: translate(-2px,2px) skew(-5deg,5deg); }
-  40% { transform: translate(2px,-2px) skew(5deg,-5deg); }
-  60% { transform: translate(-2px,2px) skew(-5deg,5deg); }
-  80% { transform: translate(2px,-2px) skew(5deg,-5deg); }
-  100% { transform: translate(0,0) skew(0deg,0deg); }
+@keyframes glitchPuzzle {
+  0%   { transform: translate(0, 0); color: white; text-shadow: none; }
+  20%  { transform: translate(-2px, 1px); color: #ff00ff; text-shadow: 2px 0 #00ffff; }
+  40%  { transform: translate(2px, -1px); color: #00ffff; text-shadow: -2px 0 #ff00ff; }
+  60%  { transform: translate(-1px, 2px); color: #ff00ff; text-shadow: 1px 1px #00ffff; }
+  80%  { transform: translate(1px, -2px); color: #00ffff; text-shadow: -1px -1px #ff00ff; }
+  100% { transform: translate(0, 0); color: white; text-shadow: none; }
 }
   #tipButton {
   position: fixed;
