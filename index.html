@@ -471,23 +471,33 @@ if(word.length < 6){
   return;
 }
 
-// 🔒 Anti-Spam / Anti-Exploit
-const counts = {};
-for (let char of word.toLowerCase()) {
-  counts[char] = (counts[char] || 0) + 1;
+// 2️⃣ Wiederholungs-Start
+const startChar = word[0].toLowerCase();
+let run = 0;
+for (let c of word.toLowerCase()) {
+  if (c === startChar) run++;
+  else break;
 }
-
-const maxCount = Math.max(...Object.values(counts));
-if (maxCount / word.length >= 0.8) {
+if (run >= 4) {
   showWordError("Wrong");
   return;
-}  
+}
 
-// 🔒 Keine Wörter nur aus einem Buchstaben
-const uniqueChars = new Set(word.toLowerCase());
-if(uniqueChars.size === 1){
-    showWordError("Wrong");
-    return;
+// 3️⃣ Buchstaben-Dominanz
+const counts = {};
+for (let c of word.toLowerCase()) {
+  counts[c] = (counts[c] || 0) + 1;
+}
+const maxCount = Math.max(...Object.values(counts));
+if (maxCount / word.length >= 0.7) {
+  showWordError("Wrong");
+  return;
+}
+
+// 4️⃣ Varianz
+if (new Set(word.toLowerCase()).size < 3) {
+  showWordError("Wrong");
+  return;
 }
 
   // Kein gleicher Endbuchstabe wie davor
