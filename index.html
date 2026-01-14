@@ -460,25 +460,7 @@ function startWordChain(){
   "Threshold","Resonance","Asymmetry","Continuum","Parable"];
 }
   
-function isReverseBuild(input, original) {
-  input = input.toLowerCase();
-  original = original.toLowerCase();
-
-  let revIndex = original.length - 1;
-
-  for (let i = 0; i < input.length; i++) {
-    if (revIndex < 0) break;
-
-    if (input[i] !== original[revIndex]) {
-      return false; // Muster gebrochen → OK
-    }
-    revIndex--;
-  }
-
-  // ab 2 Buchstaben rückwärts = verboten
-  return input.length >= 2;
-}
-  function playWord(){
+function playWord(){
   const input=document.getElementById('playerWord');
   let word=input.value.trim(); word=word.charAt(0).toUpperCase()+word.slice(1);
   const message=document.getElementById('message');
@@ -499,13 +481,19 @@ if(word.slice(-1).toLowerCase() === lastTwo[0]){
 }
   const lastChar=currentWord.slice(-1).toLowerCase();
   const reversed=currentWord.split("").reverse().join("").toLowerCase();
-  if(word[0].toLowerCase()!==lastChar){showWordError("Wrong");return;}
-  if(word.toLowerCase()===currentWord.toLowerCase()){showWordError("Wrong");return;}
-  if(word.toLowerCase()===reversed){showWordError("Reversed");return;}
-  if(isReverseBuild(word, currentWord)){
+  // 🔒 Blockiere ALLE Reverse-Varianten (auch manipulierte)
+const blockedBase = reversed.slice(0, -1); // z.B. "larue"
+
+if (
+  word.toLowerCase().startsWith(blockedBase) &&
+  word.length > blockedBase.length
+) {
   showWordError("Reversed");
   return;
 }
+  if(word[0].toLowerCase()!==lastChar){showWordError("Wrong");return;}
+  if(word.toLowerCase()===currentWord.toLowerCase()){showWordError("Wrong");return;}
+  
   if(usedWords.map(w=>w.toLowerCase()).includes(word.toLowerCase())){showWordError("Already used");return;}
   usedWords.push(word); currentWord=word;
   document.getElementById('wordDisplay').textContent=``;
