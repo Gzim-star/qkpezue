@@ -198,6 +198,17 @@ button:hover { background: #00000000; }
   animation: none;
   pointer-events: none;
 }
+/* 🔴 Alarm-Impuls */
+.alarm {
+  animation: alarmFlash 0.6s ease-in-out;
+}
+
+@keyframes alarmFlash {
+  0%   { background: black; }
+  30%  { background: #8b0000; } /* dunkles Rot */
+  60%  { background: #ff0000; } /* Alarm */
+  100% { background: black; }
+}
 </style>
 </head>
 <body>
@@ -599,9 +610,23 @@ function wrongAttempt(msg = "Wrong") {
   wrongAttempts++;
 
   if(wrongAttempts >= 1){
-    setTimeout(restartGame, 800);
-  }
-}    
+  triggerWordChainAlarmReset();
+  return;
+}
+  function triggerWordChainAlarmReset(delay = 800){
+  if(stage !== 'word') return; // 🔒 NUR WordChain
+
+  document.body.classList.add('alarm');
+
+  setTimeout(() => {
+    document.body.classList.remove('alarm');
+  }, 600);
+
+  setTimeout(() => {
+    restartGame();
+  }, delay);
+}   
+
 // ========================== TIC TAC TOE ==========================
 function startTicTacToe(){
   stage='tic';
