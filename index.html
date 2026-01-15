@@ -498,15 +498,7 @@ function playWord(){
     input.value = '';
     setTimeout(aiTurn, 500);
 }
-function wrongAttempt(msg = "Wrong") {
-    showWordError(msg);
-    wrongAttempts++;
 
-    if(wrongAttempts >= 4) {
-        // 4 falsche Versuche → Reset
-        setTimeout(restartGame, 800); // kleines Delay, damit Spieler das Wrong sieht
-    }
-}
 // 2️⃣ Wiederholungs-Start
 const startChar = word[0].toLowerCase();
 let run = 0;
@@ -621,6 +613,16 @@ function showWordChainHint() {
     hint.style.opacity = "0";
   }, 3000);
 }
+function wrongAttempt(msg = "Wrong") {
+    showWordError(msg);
+    wrongAttempts++;
+
+    if(wrongAttempts >= 4) {
+        // 4 falsche Versuche → Reset
+        setTimeout(restartGame, 800); // kleines Delay, damit Spieler das Wrong sieht
+    }
+}
+    
 // ========================== TIC TAC TOE ==========================
 function startTicTacToe(){
   stage='tic';
