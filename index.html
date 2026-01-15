@@ -469,7 +469,7 @@ function playWord(){
     // <-- HIER direkt nach dem Trim einfügen:
   // ❌ Nur Buchstaben erlaubt
   if (!/^[a-zA-Z]+$/.test(word)) {
-    showWordError("Wrong");
+    wrongAttempt("Wrong");
     return;
 }
   
