@@ -416,6 +416,7 @@ let timer=10, timerInterval;
 let mathTimer=30, mathTimerInterval;
 let lastPlayerClick = 0; // Zeit des letzten Klicks
 const clickCooldown = 300; // 300 ms zwischen erlaubten Klicks
+let wrongAttempts = 0; // ✅ RICHTIG PLATZIERT
 function showWordError(text) {
   const message = document.getElementById('message');
   if (!message) return;
@@ -465,19 +466,47 @@ function playWord(){
   let word=input.value.trim(); word=word.charAt(0).toUpperCase()+word.slice(1);
   const message=document.getElementById('message');
   if(!word) return;
-    // <-- HIER direkt nach dem Trim einfügen:
-  // ❌ Nur Buchstaben erlaubt
-  if (/[a-zA-Z]/.test(word)) {
-    showWordError("Wrong");
-    return;
-}
-  
-  // Mindestlänge
-if(word.length < 6){
-  showWordError("Wrong");
-  return;
-}
+    // Prüfe nur Buchstaben
+    if(!/^[a-zA-Z]+$/.test(word)) {
+        wrongAttempt(); return;
+    }
 
+    // Mindestlänge
+    if(word.length < 6) { wrongAttempt(); return; }
+
+    // Startbuchstabe
+    const lastChar = currentWord.slice(-1).toLowerCase();
+    if(word[0].toLowerCase() !== lastChar) { wrongAttempt(); return; }
+
+    // Schon benutzt
+    if(usedWords.map(w => w.toLowerCase()).includes(word.toLowerCase())) { wrongAttempt("Already used"); return; }
+
+    // Reverse blockieren
+    const reversed = currentWord.split("").reverse().join("").toLowerCase();
+    const blockedBase = reversed.slice(0, -1);
+    if(word.toLowerCase().startsWith(blockedBase) && word.length > blockedBase.length) { wrongAttempt(); return; }
+
+    // WordList Check (nur erlaubte Wörter)
+    if(!wordList.map(w => w.toLowerCase()).includes(word.toLowerCase())) { wrongAttempt(); return; }
+
+    // ✅ Alles korrekt → Reset falsche Versuche
+    wrongAttempts = 0;
+
+    usedWords.push(word);
+    currentWord = word;
+    document.getElementById('wordDisplay').textContent = '';
+    input.value = '';
+    setTimeout(aiTurn, 500);
+}
+function wrongAttempt(msg = "Wrong") {
+    showWordError(msg);
+    wrongAttempts++;
+
+    if(wrongAttempts >= 4) {
+        // 4 falsche Versuche → Reset
+        setTimeout(restartGame, 800); // kleines Delay, damit Spieler das Wrong sieht
+    }
+}
 // 2️⃣ Wiederholungs-Start
 const startChar = word[0].toLowerCase();
 let run = 0;
