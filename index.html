@@ -527,10 +527,10 @@ if (
   wrongAttempt("Wrong");
   return;
 }
-  if(word[0].toLowerCase()!==lastChar){showWordError("Wrong");return;}
-  if(word.toLowerCase()===currentWord.toLowerCase()){showWordError("Wrong");return;}
+  if(word[0].toLowerCase()!==lastChar){wrongAttempt("Wrong");return;}
+  if(word.toLowerCase()===currentWord.toLowerCase()){wrongAttempt("Wrong");return;}
   
-  if(usedWords.map(w=>w.toLowerCase()).includes(word.toLowerCase())){showWordError("Already used");return;}
+  if(usedWords.map(w=>w.toLowerCase()).includes(word.toLowerCase())){wrongAttempt("Already used");return;}
   usedWords.push(word); currentWord=word;
   document.getElementById('wordDisplay').textContent=``;
   input.value=''; message.textContent='';
@@ -595,7 +595,7 @@ if(possible.length === 0){
 }
 
 function wrongAttempt(msg = "Wrong") {
-  wrongAttempt(msg);
+  showWordError(msg);
   wrongAttempts++;
 
   if(wrongAttempts >= 4){
