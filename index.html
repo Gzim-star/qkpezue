@@ -931,8 +931,15 @@ function showChromaticWin(){
   }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
 }
 const treasure = document.getElementById('treasure');
+// Starte direkt den Timer beim Laden
+resetTreasureTimer();
 
+// Aktionen, die Timer zurücksetzen
+['click', 'mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
+  treasure.addEventListener(evt, resetTreasureTimer);
+});
 treasure.onclick = (e) => {
+  resetTreasureTimer(); // ⬅️ Direkt hier hinzufügen
   // Funken erzeugen
   for(let i=0; i<5; i++){
     const spark = document.createElement('div');
@@ -989,7 +996,18 @@ setTimeout(() => {
   btn.style.pointerEvents = 'auto';
   }
 }, 90000);
+// ⏳ GOLDEN POINT INAKTIVITÄT
+const TREASURE_INACTIVITY_LIMIT = 60000; // 60 Sekunden
+let treasureInactivityTimer;
 
+// Funktion, die Timer zurücksetzt
+function resetTreasureTimer() {
+  clearTimeout(treasureInactivityTimer);
+  treasureInactivityTimer = setTimeout(() => {
+    console.log("Treasure inactive → Auto-Restart");
+    restartGame();
+  }, TREASURE_INACTIVITY_LIMIT);
+}
 </script>
 </body>
 </html>
