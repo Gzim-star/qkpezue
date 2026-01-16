@@ -255,7 +255,7 @@ button:hover { background: #00000000; }
 </video>
   <script>
   document.getElementById('startScreen').onclick = () => {
-  startFlowWatcher(); // 👁 System merkt: Aktivität
+   clearTimeout(flowInactiveTimer);// 👁 System merkt: Aktivität
   document.getElementById('startScreen').style.display = 'none';
 };
     // ========================== TIP BUTTON LOGIC =========================
@@ -429,6 +429,13 @@ function showWordError(text) {
   setTimeout(() => {
     message.textContent = "";
   }, 1200);
+}
+function startFlowWatcher(){
+  clearTimeout(flowInactiveTimer);
+
+  flowInactiveTimer = setTimeout(() => {
+    restartGame();
+  }, 10000); // 60 Sekunden
 }
 // ========================== WORD CHAIN ==========================
 function startWordChain(){
@@ -928,13 +935,7 @@ function showChromaticWin(){
 
   text.style.opacity = "1";
 
-  function startFlowWatcher(){
-  clearTimeout(flowInactiveTimer);
 
-  flowInactiveTimer = setTimeout(() => {
-    restartGame();
-  }, 10000); // 60 Sekunden Inaktivität im Flow
-}
   
   setTimeout(() => {
     restartGame();
