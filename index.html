@@ -989,47 +989,7 @@ setTimeout(() => {
   btn.style.pointerEvents = 'auto';
   }
 }, 90000);
-let lastActivity = Date.now();
-let sleeping = false;
 
-// Overlay fürs „Sleep/Loading“
-const sleepOverlay = document.createElement('div');
-sleepOverlay.style.position = 'fixed';
-sleepOverlay.style.inset = '0';
-sleepOverlay.style.background = 'rgba(0,0,0,0.85)'; // fast unsichtbar, dunkelt ab
-sleepOverlay.style.display = 'none';
-sleepOverlay.style.zIndex = '9999';
-sleepOverlay.style.transition = 'opacity 0.5s';
-document.body.appendChild(sleepOverlay);
-
-function smartSleepWatcher() {
-  const now = Date.now();
-
-  // 60 Sekunden Inaktivität → schlafen
-  if (!sleeping && now - lastActivity > 500) {
-    sleeping = true;
-    sleepOverlay.style.display = 'block';
-    sleepOverlay.style.opacity = '1';
-  }
-
-  requestAnimationFrame(smartSleepWatcher);
-}
-
-// Player Aktivität → „Weck“ das System
-['mousemove','mousedown','keydown','touchstart'].forEach(evt => {
-  window.addEventListener(evt, () => {
-    lastActivity = Date.now();
-
-    if (sleeping) {
-      // Overlay ausblenden
-      sleepOverlay.style.opacity = '0';
-      setTimeout(() => { sleepOverlay.style.display = 'none'; }, 500);
-      sleeping = false;
-    }
-  });
-});
-
-smartSleepWatcher();
 </script>
 </body>
 </html>
