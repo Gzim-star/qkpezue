@@ -417,7 +417,6 @@ let mathTimer=30, mathTimerInterval;
 let lastPlayerClick = 0; // Zeit des letzten Klicks
 const clickCooldown = 300; // 300 ms zwischen erlaubten Klicks
 let wrongAttempts = 0; // ✅ RICHTIG PLATZIERT
-
 function showWordError(text) {
   const message = document.getElementById('message');
   if (!message) return;
@@ -943,30 +942,7 @@ treasure.onclick = (e) => {
     document.body.appendChild(spark);
     setTimeout(() => spark.remove(), 1000);
   }
-// ========================== TREASURE INAKTIVITÄT ==========================
-const treasure = 20000; // 60 Sekunden
-let treasureInactivityTimer;
 
-function resettreasure() {
-  clearTimeout(treasureInactivityTimer);
-  treasureInactivityTimer = setTimeout(() => {
-    console.log("Treasure inactive → Auto-Restart");
-    restartGame(); // nutzt deine bestehende Restart-Funktion
-  }, TREASURE_INACTIVITY_LIMIT);
-}
-
-// Hol das Goldene Element
-const treasure = document.getElementById('treasure');
-
-if (treasure) {
-  // Timer starten, wenn Flow-Bild sichtbar ist
-  resetGoldenTimer();
-
-  // Jede Interaktion mit dem Goldenen Punkt setzt Timer zurück
-  ['mousemove', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
-    treasure.addEventListener(evt, resetGoldenTimer);
-  });
-}
   // Text anzeigen
   const msg = document.createElement('div');
   msg.textContent = "Welcome";
