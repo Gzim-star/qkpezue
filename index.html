@@ -257,6 +257,24 @@ button:hover { background: #00000000; }
  const startScreen = document.getElementById('startScreen').onclick = () => {
  const startScreen = document.getElementById('startScreen').style.display = 'none';
  const startImage = startScreen.querySelector('img');
+// TipButton blockieren
+const tipButton = document.getElementById('tipButton');
+tipButton.style.opacity = '0';
+tipButton.style.pointerEvents = 'none';
+
+// StartButton blockieren
+const startButton = document.getElementById('startButton');
+startButton.style.opacity = '0';
+startButton.style.pointerEvents = 'none';
+
+// Welcome-Video blockieren
+const welcomeVideo = document.getElementById('welcomeVideo');
+welcomeVideo.pause();
+welcomeVideo.style.display = 'none';
+// Cubaface blockiern
+const cubaFace = tipButton.querySelector('.cube-face');
+cubaFace.style.opacity = '0';
+cubaFace.style.pointerEvents = 'none';
 };
     // ========================== TIP BUTTON LOGIC =========================
 const tipButton = document.getElementById('tipButton');
