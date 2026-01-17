@@ -282,6 +282,11 @@ window.addEventListener('DOMContentLoaded', () => {
       if(startScreen.dataset.started === 'true') return oldSetTimeout(fn, t, ...args);
       return null;
   } 
+  // Klick auf Flow-Bild oder Goldpunkt
+  startScreen.querySelector('img').onclick = startOnClick;
+  treasure.onclick = startOnClick;
+
+});
 // ========================== TIP BUTTON LOGIC =========================
 const tipButton = document.getElementById('tipButton');
 const cubeFace = tipButton.querySelector('.cube-face');
