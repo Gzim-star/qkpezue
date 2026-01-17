@@ -684,14 +684,26 @@ function playerMove(i){
     gameOver=true;
     ticScore.draw++;
     updateScore();
-    setTimeout(resetBoard,800);
-    return;
+      // 🟡 NEU: 3 Draws → zurück zum Flow-Bild
+  if (ticScore.draw >= 3) {
+    setTimeout(restartGame, 800);
+  } else {
+    setTimeout(resetBoard, 800);
   }
+  return;
+}
 
   // AI-Zug nach kurzer Verzögerung
   setTimeout(aiMove,400);
 }
-function aiMove(){if(gameOver)return; const lvl=document.getElementById('levelSelect').value; let move;if(lvl==='easy')move=randomMove(); else if(lvl==='medium')move=mediumMove(); else move=hardMove(); board[move]='O'; renderBoard(); if(checkWinner('O')){gameOver=true; ticScore.ai++; document.getElementById('message').textContent="AI wins"; updateScore(); if(ticScore.ai>=3){ setTimeout(startMathChallenge,800);} else { setTimeout(resetBoard,800);} return;} if(board.every(c=>c!=='')){gameOver=true; ticScore.draw++; updateScore(); setTimeout(resetBoard,800); return;} startTimer();}
+function aiMove(){if(gameOver)return; const lvl=document.getElementById('levelSelect').value; let move;if(lvl==='easy')move=randomMove(); else if(lvl==='medium')move=mediumMove(); else move=hardMove(); board[move]='O'; renderBoard(); if(checkWinner('O')){gameOver=true; ticScore.ai++; document.getElementById('message').textContent="AI wins"; updateScore(); if(ticScore.ai>=3){ setTimeout(startMathChallenge,800);} else { setTimeout(resetBoard,800);} return;} if(board.every(c=>c!=='')){gameOver=true; ticScore.draw++; updateScore();   // 🟡 NEU: 3 Draws → zurück zum Flow-Bild
+  if (ticScore.draw >= 3) {
+    setTimeout(restartGame, 800);
+  } else {
+    setTimeout(resetBoard, 800);
+  }
+  return;
+} startTimer();}
 function resetBoard(){board=['','','','','','','','','']; gameOver=false; document.getElementById('message').textContent=''; renderBoard(); startTimer();}
 function randomMove(){const e=board.map((v,i)=>v===''?i:null).filter(v=>v!==null); return e[Math.floor(Math.random()*e.length)];}
 function mediumMove(){for(let i=0;i<9;i++){if(board[i]===''){board[i]='O'; if(checkWinner('O'))return i; board[i]='';}} for(let i=0;i<9;i++){if(board[i]===''){board[i]='X'; if(checkWinner('X')){board[i]=''; return i;} board[i]='';}} if(board[4]==='') return 4; const c=[0,2,6,8].filter(i=>board[i]===''); if(c.length) return c[Math.floor(Math.random()*c.length)]; return randomMove();}
