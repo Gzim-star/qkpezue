@@ -254,7 +254,9 @@ button:hover { background: #00000000; }
   <source src="att.7KmgCeoPRAfcm8wOdhsPirAp4NqHkg-VfXklv2c3BSk.MP4" type="video/mp4">
 </video>
   <script>
+  let gameReady = false; // 🔒 Spiel gesperrt beim Laden
   document.getElementById('startScreen').onclick = () => {
+   gameReady = true; // 🔓 Spieler ist bereit
   document.getElementById('startScreen').style.display = 'none';
 };
     // ========================== TIP BUTTON LOGIC =========================
@@ -263,13 +265,15 @@ const cubeFace = tipButton.querySelector('.cube-face');
 
 // TIP BUTTON erst nach 9 Sekunden erscheinen lassen
 setTimeout(() => {
-  tipButton.classList.add('show'); // Button kommt rein
+ if (!gameReady) return; // 🔒 Blockiert, wenn Spieler nicht bereit ist 
+tipButton.classList.add('show'); // Button kommt rein
 
   //  Würfel langsam rollen
   tipButton.classList.add('roll');
 
   // ❕ nach dem Rollen
   setTimeout(() => {
+   if (!gameReady) return; // 🔒 Blockiert, wenn Spieler nicht bereit ist
     cubeFace.textContent = '❕';
     tipButton.classList.remove('roll'); // Animation beenden
     // ❕ beginnt sanft zu pulsieren (Modal ist zu)
@@ -430,6 +434,7 @@ function showWordError(text) {
 }
 // ========================== WORD CHAIN ==========================
 function startWordChain(){
+  if (!gameReady) return; // 🔒 Sicherheit
   stage='word';
   const container=document.getElementById('gameContainer');
   container.innerHTML=`
@@ -995,6 +1000,7 @@ setTimeout(() => {
  
 };
 setTimeout(() => {
+  if (gameReady) return;
   const btn = document.getElementById('startButton');
   if (btn) {
   btn.style.opacity = '1';
