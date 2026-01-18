@@ -254,12 +254,11 @@ button:hover { background: #00000000; }
   <source src="att.7KmgCeoPRAfcm8wOdhsPirAp4NqHkg-VfXklv2c3BSk.MP4" type="video/mp4">
 </video>
   <script>
-  
-  document.getElementById('startScreen').onclick = () => {
     if (!gameReady) {
     gameReady = true;
     startIntroTimers();
     }
+  document.getElementById('startScreen').onclick = () => {
   document.getElementById('startScreen').style.display = 'none';
 };
     // ========================== TIP BUTTON LOGIC =========================
@@ -267,8 +266,7 @@ const tipButton = document.getElementById('tipButton');
 const cubeFace = tipButton.querySelector('.cube-face');
 
 // TIP BUTTON erst nach 9 Sekunden erscheinen lassen
-function startIntroTimers() {
-
+setTimeout(() => {
   tipButton.classList.add('show'); // Button kommt rein
 
   //  Würfel langsam rollen
@@ -418,12 +416,12 @@ let stage='start', wordScore=0, ticScore={player:0,ai:0,draw:0};
 let currentWord='', usedWords=[], wordList=[];
 let board=[], gameOver=false;
 let correctAnswer=0, correctMathCount=0;
-let gameReady = false;
 let timer=10, timerInterval;
 let mathTimer=30, mathTimerInterval;
 let lastPlayerClick = 0; // Zeit des letzten Klicks
 const clickCooldown = 300; // 300 ms zwischen erlaubten Klicks
 let wrongAttempts = 0; // ✅ RICHTIG PLATZIERT
+let gameReady = false;
 function showWordError(text) {
   const message = document.getElementById('message');
   if (!message) return;
@@ -952,11 +950,11 @@ function showChromaticWin(){
 const treasure = document.getElementById('treasure');
 
 treasure.onclick = (e) => {
- if (!gameReady) {
+    if (!gameReady) {
     gameReady = true;
     startIntroTimers();
   }
-     // Funken erzeugen
+  // Funken erzeugen
   for(let i=0; i<5; i++){
     const spark = document.createElement('div');
     spark.className = 'spark';
@@ -1005,8 +1003,8 @@ setTimeout(() => {
 }, 13000); // 3s warten + 6s Video
  
 };
-  
-  function startIntroTimers() {
+function startIntroTimers() {
+ setTimeout(() => {
   const btn = document.getElementById('startButton');
   if (btn) {
   btn.style.opacity = '1';
