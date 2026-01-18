@@ -899,6 +899,24 @@ function showChromaticMessage(){
     text.style.opacity = "0";
   }, 3000);
 }
+
+function restartGame(){
+  // ⏹ Alle wichtigen Timer stoppen
+  clearInterval(timerInterval);
+  clearInterval(mathTimerInterval);
+  clearInterval(chromaticTimerInterval);
+  clearTimeout(uniformTimeout);
+
+  // 🔑 Reset relevante Variablen
+  wrongAttempts = 0;
+  gameOver = false;
+  solved = false;
+  correctMathCount = 0;
+
+  // ⬆ Container verstecken, Treasure wieder anzeigen
+  document.getElementById('gameContainer').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'flex';
+}
 function restartGame(){
   clearInterval(chromaticTimerInterval);
   clearInterval(mathTimerInterval);
