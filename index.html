@@ -899,26 +899,42 @@ function showChromaticMessage(){
     text.style.opacity = "0";
   }, 3000);
 }
-
 function restartGame(){
-  // ⏹ Alle wichtigen Timer stoppen
+  // ⏹ Alle Timer stoppen
   clearInterval(timerInterval);
   clearInterval(mathTimerInterval);
   clearInterval(chromaticTimerInterval);
   clearTimeout(uniformTimeout);
+  clearTimeout(hintTimeout); // falls Word Chain Hint Timer noch läuft
 
-  // 🔑 Reset relevante Variablen
+  // 🔑 Wichtige Variablen für ALLE Spiele zurücksetzen
   wrongAttempts = 0;
   gameOver = false;
   solved = false;
   correctMathCount = 0;
 
-  // ⬆ Container verstecken, Treasure wieder anzeigen
-  document.getElementById('gameContainer').style.display = 'none';
-  document.getElementById('startScreen').style.display = 'flex';
+  // ✅ Word Chain zurücksetzen
+  currentWord = '';
+  usedWords = [];
+  wordScore = 0;
 
-   
+  // ✅ Tic-Tac-Toe zurücksetzen
+  board = [];
+  ticScore = {player:0, ai:0, draw:0};
+
+  // ✅ Math Challenge zurücksetzen
+  correctAnswer = 0;
+
+  // ⬆ Spielcontainer verstecken
+  const container = document.getElementById('gameContainer');
+  container.style.display = 'none';
+  container.innerHTML = ''; // Container leeren, damit altes Spiel weg ist
+
+  // ⬆ Treasure wieder anzeigen
+  const startScreen = document.getElementById('startScreen');
+  startScreen.style.display = 'flex';
 }
+
 function showChromaticWin(){
   const text = document.getElementById('chromaticWinText');
   if(!text) return;
