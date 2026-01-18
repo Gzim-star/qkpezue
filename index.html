@@ -424,6 +424,7 @@ let lastPlayerClick = 0; // Zeit des letzten Klicks
 const clickCooldown = 300; // 300 ms zwischen erlaubten Klicks
 let wrongAttempts = 0; // ✅ RICHTIG PLATZIERT
 let ghostRestartPending = false;
+let ghostVisible = false;
 function triggerGhostRestart() {
   ghostRestartPending = true;
 }
