@@ -279,7 +279,12 @@ button:hover { background: #00000000; }
   <script>
 const treasure = document.getElementById('treasure');
 const ghost = document.getElementById('ghostRestartTreasure');
+startButton.onclick = () => {
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('gameContainer').style.display = 'flex';
 
+  startWordChain();
+};
     // ========================== TIP BUTTON LOGIC =========================
 const tipButton = document.getElementById('tipButton');
 const cubeFace = tipButton.querySelector('.cube-face');
@@ -921,30 +926,23 @@ function showChromaticMessage(){
     text.style.opacity = "0";
   }, 3000);
 }
-function restartGame(){
+function restartGame() {
   clearInterval(chromaticTimerInterval);
   clearInterval(mathTimerInterval);
   clearTimeout(uniformTimeout);
-  
-  wrongAttempts = 0; // 🔑 WICHTIG
-  
-  // Variablen zurücksetzen
-  stage = 'start';
+
+  // Scores / States
   wordScore = 0;
-  ticScore = {player:0, ai:0, draw:0};
-  currentWord = '';
-  usedWords = [];
-  board = [];
-  gameOver = false;
-  correctAnswer = 0;
+  ticScore = 0;
   correctMathCount = 0;
+  wrongAttempts = 0;
 
-  // Spiel ausblenden
+  stage = 'start';
+
+  // Nur Sichtbarkeit, KEIN Start
   document.getElementById('gameContainer').style.display = 'none';
-
-  // Flow-Bild anzeigen
-  const startScreen = document.getElementById('startScreen');
-  startScreen.style.display = 'flex';
+  document.getElementById('startScreen').style.display = 'flex';
+}
     // 👻 GHOST ERSCHEINT ERST JETZT
 if (ghostRestartPending && !ghostVisible) {
   showGhostRestartTreasure();
@@ -966,7 +964,7 @@ function globalRestartFromTreasure() {
   restartGame();
 
   // 👻 Ghost zurücksetzen
-  const ghost = document.getElementById('ghostRestartTreasure');
+
   ghost.style.display = 'none';
   ghostRestartPending = false;
   ghostVisible = false;
@@ -981,9 +979,7 @@ function globalRestartFromTreasure() {
   uiStarted = false;
   startUISequence();
 }
-treasure.onclick = (e) => {
-  e.stopPropagation(); // 🔑 GANZ WICHTIG
-  globalRestartFromTreasure();
+
 
 // Funken erzeugen
   for(let i=0; i<5; i++){
