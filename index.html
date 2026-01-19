@@ -946,30 +946,41 @@ function showGhostRestartTreasure(){
   const ghost = document.getElementById('ghostRestartTreasure');
   ghost.style.display = 'block';
 
-  ghost.onclick = () => {
-    ghost.style.display = 'none';
-    ghostRestartPending = false;
-    ghostVisible = false;
-    restartGameHard();
-  };
-}
-function restartGameHard(){
-  uiStarted = false;
-  wrongAttempts = 0;
+ ghost.onclick = () => {
+  ghost.style.display = 'none';
+
   ghostRestartPending = false;
   ghostVisible = false;
+  uiStarted = false;
+  wrongAttempts = 0;
 
   // Startscreen aus
   document.getElementById('startScreen').style.display = 'none';
 
-  // Game sichtbar
+  // Game anzeigen
   const container = document.getElementById('gameContainer');
   container.style.display = 'flex';
-  container.innerHTML = `
-    <h1></h1>
-    <button id="startButton" onclick="startWordChain()">START</button>
-  `;
 
+  // 🔥 DIREKT NEUSTARTEN
+  startWordChain();
+};
+
+function restartGame(){
+  clearInterval(chromaticTimerInterval);
+  clearInterval(mathTimerInterval);
+  clearTimeout(uniformTimeout);
+
+  wrongAttempts = 0;
+  stage = 'start';
+
+  document.getElementById('gameContainer').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'flex';
+
+  if (ghostRestartPending && !ghostVisible) {
+    showGhostRestartTreasure();
+    ghostVisible = true;
+  }
+}
 
 
 
