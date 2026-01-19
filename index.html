@@ -202,21 +202,20 @@ button:hover { background: #00000000; }
 </head>
 <body>
   <!-- Ghost Restart Treasure (unsichtbar) -->
-<div id="ghostRestartTreasure" title="Restart" style="
+<div id="ghostRestartTreasure" title="Restarting..." style="
     position: absolute;
     top: 46.3%;
     left: 46.0%;
     transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: gold;
-    cursor: pointer;
-    z-index: 5000;
+    cursor: default;
+    z-index: 4000;
     box-shadow: 0 0 10px 3px gold;
-    animation: softPulse 2s infinite;
+    animation: pulse 2s infinite;
     display: none;
-    pointer-events: auto;
 "></div>
  <div id="startScreen">
   <!-- Schatz versteckt -->
@@ -917,9 +916,9 @@ function restartGame(){
   clearInterval(chromaticTimerInterval);
   clearInterval(mathTimerInterval);
   clearTimeout(uniformTimeout);
-
+  
   wrongAttempts = 0; // 🔑 WICHTIG
-
+  
   // Variablen zurücksetzen
   stage = 'start';
   wordScore = 0;
@@ -931,44 +930,39 @@ function restartGame(){
   correctAnswer = 0;
   correctMathCount = 0;
 
-  
-  
   // Spiel ausblenden
   document.getElementById('gameContainer').style.display = 'none';
 
   // Flow-Bild anzeigen
   const startScreen = document.getElementById('startScreen');
   startScreen.style.display = 'flex';
-
-  // 👻 GHOST ERSCHEINT NUN UND WARTET AUF KLICK
-  if (ghostRestartPending && !ghostVisible) {
-    showGhostRestartTreasure();
-    ghostVisible = true;
+    // 👻 GHOST ERSCHEINT ERST JETZT
+if (ghostRestartPending && !ghostVisible) {
+  showGhostRestartTreasure();
+  ghostVisible = true;
   }
 }
-
 function showGhostRestartTreasure(){
   const ghost = document.getElementById('ghostRestartTreasure');
   ghost.style.display = 'block';
-  ghost.style.cursor = 'pointer';  // damit man weiß, dass man klicken kann
-  // Nur hier kann der Spieler auf den Ghost klicken, um Restart zu starten
+
   ghost.onclick = () => {
     ghost.style.display = 'none';
     ghostRestartPending = false;
     ghostVisible = false;
-
-    // ⚡ Erst jetzt das Spiel richtig starten
     restartGameHard();
   };
-} 
+}
+
+ 
 
 
 function restartGameHard(){
   uiStarted = false;
   wrongAttempts = 0;
   ghostRestartPending = false;
-  ghostVisible = false;
- 
+
+  uiStarted = false;
   
   document.getElementById('startScreen').style.display = 'none';
   document.getElementById('gameContainer').style.display = 'flex';
