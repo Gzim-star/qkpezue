@@ -953,22 +953,36 @@ function showGhostRestartTreasure(){
     restartGameHard();
   };
 }
-
- 
-
-
 function restartGameHard(){
   uiStarted = false;
   wrongAttempts = 0;
   ghostRestartPending = false;
+  ghostVisible = false;
 
-  uiStarted = false;
-  
+  // Startscreen aus
   document.getElementById('startScreen').style.display = 'none';
-  document.getElementById('gameContainer').style.display = 'flex';
 
+  // Game sichtbar
+  const container = document.getElementById('gameContainer');
+  container.style.display = 'flex';
+  container.innerHTML = `
+    <h1></h1>
+    <button id="startButton" onclick="startWordChain()">START</button>
+  `;
+
+  // UI neu starten
   startUISequence();
 }
+ ghost.onclick = () => {
+  ghost.style.display = 'none';
+  ghostRestartPending = false;
+  ghostVisible = false;
+
+  startWordChain(); // 🔥 DIREKT
+};
+
+
+
   function showChromaticWin(){
   const text = document.getElementById('chromaticWinText');
   if(!text) return;
