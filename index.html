@@ -1065,65 +1065,6 @@ function startUISequence() {
 }
 
 
-// Fehler → Ghost anzeigen
-function triggerGhostRestart() {
-  ghostRestartPending = true;
-}
-
-// Normaler Restart → Flow-Bild
-function restartGame() {
-  // Timer stoppen
-  clearInterval(chromaticTimerInterval);
-  clearInterval(mathTimerInterval);
-  clearTimeout(uniformTimeout);
-
-  wrongAttempts = 0;
-
-  // Variablen zurücksetzen
-  stage = 'start';
-  wordScore = 0;
-  ticScore = {player:0, ai:0, draw:0};
-  currentWord = '';
-  usedWords = [];
-  board = [];
-  gameOver = false;
-  correctAnswer = 0;
-  correctMathCount = 0;
-
-  // Spiel ausblenden, Flow-Bild anzeigen
-  document.getElementById('gameContainer').style.display = 'none';
-  document.getElementById('startScreen').style.display = 'flex';
-
-  // Ghost nur anzeigen, wenn Fehler-Flow
-  if (ghostRestartPending && !ghostVisible) {
-    const ghost = document.getElementById('ghostRestartTreasure');
-    ghost.style.display = 'block';
-    ghost.style.cursor = 'pointer';
-    ghostVisible = true;
-
-    ghost.onclick = () => {
-      ghost.style.display = 'none';
-      ghostRestartPending = false;
-      ghostVisible = false;
-
-      // Startet das Spiel neu
-      restartGameHard();
-    };
-  }
-}
-
-// Richtiges Spiel neu starten
-function restartGameHard() {
-  document.getElementById('startScreen').style.display = 'none';
-  document.getElementById('gameContainer').style.display = 'flex';
-  uiStarted = false; // UI Sequence wieder starten
-  startUISequence();
-
-  wrongAttempts = 0;
-  ghostRestartPending = false;
-  ghostVisible = false;
-}
-
 
 
 </script>
