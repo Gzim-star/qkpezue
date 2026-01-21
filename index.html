@@ -201,45 +201,7 @@ button:hover { background: #00000000; }
 </style>
 </head>
 <body>
-   <!-- ©️2026 im Flow-Bild -->
-<div id="copyright" style="
-  position: absolute;
-  top: 90%;
-  left: 10%;
-  transform: translate(-50%, -50%);
-  bottom: 10px; /* oder wo dein ©️2026 ist */
-  right: 10px;
-  cursor: pointer;
-  z-index: 5000;
-">©️2026</div>
-
-<!-- Overlay -->
-<div id="dimensionOverlay" style="
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
-  color: white;
-  text-align: center;
-  z-index: 6000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-">
-  <p>You have stepped outside the system.<br><br>This space observes BrainTrials.</p>
-  <button id="closeOverlay" style="
-    margin-top:20px;
-    padding:12px 20px;
-    border:none;
-    border-radius:12px;
-    background:white;
-    color:black;
-    cursor:pointer;
-  ">Close</button>
-</div>
-
-  <!-- Ghost Restart Treasure (unsichtbar) -->
+     <!-- Ghost Restart Treasure (unsichtbar) -->
 <div id="ghostRestartTreasure" title="Restarting..." style="
     position: absolute;
     top: 46.3%;
@@ -307,15 +269,6 @@ button:hover { background: #00000000; }
   <source src="att.7KmgCeoPRAfcm8wOdhsPirAp4NqHkg-VfXklv2c3BSk.MP4" type="video/mp4">
 </video>
   <script>
-  // Overlay öffnen beim Klick auf ©️2026
-  document.getElementById('copyright').onclick = () => {
-    document.getElementById('dimensionOverlay').style.display = 'flex';
-  };
-
-  // Overlay schließen
-  document.getElementById('closeOverlay').onclick = () => {
-    document.getElementById('dimensionOverlay').style.display = 'none';
-  };
 
 
    // ========================== TIP BUTTON LOGIC =========================
