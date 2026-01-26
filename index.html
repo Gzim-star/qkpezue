@@ -414,7 +414,7 @@ window.onclick = (e) => {
 };
   
 // ========================== VARIABLES ==========================
-let stage='start', wordScore=0, ticScore={player:0,ai:0,draw:0};
+let stage='start', statePuzzle, wordScore=0, ticScore={player:0,ai:0,draw:0};
 let currentWord='', usedWords=[], wordList=[];
 let board=[], gameOver=false;
 let correctAnswer=0, correctMathCount=0;
@@ -917,6 +917,71 @@ function showChromaticMessage(){
     text.style.opacity = "0";
   }, 3000);
 }
+function startStatePuzzle(){
+  stage = 'statePuzzle';
+
+  const container = document.getElementById('gameContainer');
+  container.innerHTML = `
+    <div class="game-wrapper" id="statePuzzleWrapper">
+      <div id="grid"></div>
+    </div>
+  `;
+
+  initStatePuzzle();
+}
+function initStatePuzzle(){
+  const grid = document.getElementById("grid");
+  const size = 12;
+  let state = [];
+  let solved = false;
+
+  grid.style.display = "grid";
+  grid.style.gridTemplateColumns = "repeat(12, min(24px, 6vw))";
+  grid.style.gridTemplateRows = "repeat(12, min(24px, 6vw))";
+  grid.style.gap = "3px";
+
+  for(let i=0;i<size*size;i++){
+    state[i] = Math.random() > 0.5 ? 1 : 0;
+  }
+
+  function render(){
+    grid.innerHTML = "";
+    state.forEach((v,i)=>{
+      const cell = document.createElement("div");
+      cell.className = "cell" + (v ? " active" : "");
+      cell.onclick = ()=>{ if(!solved) toggle(i); };
+      grid.appendChild(cell);
+    });
+    checkSolved();
+  }
+
+  function toggle(i){
+    const n=[i,i-1,i+1,i-size,i+size];
+    n.forEach(x=>{
+      if(x>=0 && x<size*size && Math.abs((x%size)-(i%size))<=1){
+        state[x]^=1;
+      }
+    });
+    render();
+  }
+
+  function checkSolved(){
+    if(solved) return;
+    if(state.every(v=>v===0)){
+      solved = true;
+
+     triggerGhostRestart();
+      setTimeout(() => {
+       restartGame();
+        // 🔑 UI-Sequenz wieder erlauben
+        uiStarted = false;
+        startUISequence();
+      }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
+    }
+  }
+
+  render();
+}  
 function restartGame(){
   clearInterval(chromaticTimerInterval);
   clearInterval(mathTimerInterval);
@@ -955,14 +1020,8 @@ function showChromaticWin() {
   if(!text) return;
 
 text.style.opacity = "1";
- triggerGhostRestart();
-  setTimeout(() => {
-    restartGame();
-    // 🔑 UI-Sequenz wieder erlauben
-    uiStarted = false;
-    startUISequence();
-  }, 5000); // ⏱ nach 5 Sekunden zurück zum Start
-}
+ setTimeout(startStatePuzzle, 800);
+
 function globalRestartFromTreasure() {
   // 🔁 ZUERST: kompletten Game-State resetten
   restartGame();
