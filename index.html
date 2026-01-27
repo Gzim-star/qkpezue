@@ -1071,8 +1071,9 @@ function solvePuzzle(state) {
 /* Button */
 solutionBtn.onclick = () => {
   alert("Klicke diese Zellen:\n" + solvePuzzle(state).join(", "));
- 
- triggerGhostRestart();
+  }
+} 
+    triggerGhostRestart();
       setTimeout(() => {
        restartGame();
         // 🔑 UI-Sequenz wieder erlauben
